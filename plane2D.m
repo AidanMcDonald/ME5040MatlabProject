@@ -18,10 +18,10 @@ for e = 1:nel
 end
 
 % Compute and assemble nodal boundary load vector and point loads
-f = src_and_flux(f);
+f = loads(f);
 
 % Solution
 [d,f_E] = solvedr(K,f,d);
 
 % Postprocessor
-postprocessor(d);
+postprocess(d);

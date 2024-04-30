@@ -41,7 +41,7 @@ b     = zeros(neq,1);  % constant force defined over the nodes
 ngp    = 2;             % number of gauss points in each direction
 
 % essential BCs
-nd   = 2;         % number of nodes on essential boundary
+nd   = 4;         % number of dofs on essential boundary
 
 % node:    1x 1y 2x 2y 3x 3y 4x 4y 
 flags   = [2  2  2  2  0  0  0  0 ]';     % 

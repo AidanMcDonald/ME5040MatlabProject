@@ -20,8 +20,8 @@ for i=1:ngp
        [B, detJ]     = BmatPlane2D(eta,psi,C);     % derivative of the shape functions
 
        ke = ke + w(i)*w(j)*B'*D*B*detJ;   % element conductance matrix
-       se = N*b(:,e);                     % compute s(x)
-       fe = fe + w(i)*w(j)*N'*se*detJ;    % element nodal source vector
+       be = N*b(:,e);                     % body force
+       fe = fe + w(i)*w(j)*N'*be*detJ;    % element nodal source vector
 
    end       
 end

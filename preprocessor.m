@@ -1,4 +1,4 @@
-function  [K,f,d] = preprocessor;
+function  [K,f,d] = preprocessor
 include_flags;
 
 input_file_1ele;

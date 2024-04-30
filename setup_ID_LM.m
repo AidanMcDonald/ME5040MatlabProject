@@ -13,9 +13,14 @@ for i = 1:neq
     end
 end
 
-
 for i = 1:nel
+    row=1;
     for j = 1:nen
-        LM(j,i)=ID(IEN(j,i));   % create the LM matrix 
+        % Every node is ndof rows, so iterate over each
+        nodedofs = ndof*(IEN(j,i)-1);
+        for k=1:ndof
+            LM(row,i)=ID(nodedofs+k);   % create the LM matrix
+            row = row+1;
+        end
     end
 end
