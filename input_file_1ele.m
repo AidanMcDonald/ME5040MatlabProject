@@ -46,7 +46,7 @@ plot_mesh      = 'yes';
 plot_nod       = 'yes';
 plot_disp      = 'yes';
 plot_disp_contour = 'yes';
-plot_force     = 'yes';
+print_stressStrain= 'yes';
 
 
 % natural BC - defined on edges positioned on natural boundary

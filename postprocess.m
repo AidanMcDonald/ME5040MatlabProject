@@ -65,3 +65,13 @@ if strcmpi(plot_disp_contour,'yes')
     end
     title('U_y contours'); xlabel('X'); ylabel('Y'); colorbar
 end
+
+if strcmpi(print_stressStrain,'yes')
+    fprintf(1,'\n                     Stress and Strain at Gauss Points \n')
+    fprintf(1,'----------------------------------------------------------------------------- \n')
+    for e=1:nel
+    fprintf(1,'Element  %d \n',e)
+    fprintf(1,'-------------\n')
+    stressAndStrainAtIntPoints(d,e)
+    end
+end

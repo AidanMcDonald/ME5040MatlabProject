@@ -37,7 +37,7 @@ plot_mesh = 'yes';
 plot_nod = 'yes';
 plot_disp = 'yes';
 plot_disp_contour = 'yes';
-%plot_stress_xx = 'yes';
+print_stressStrain = 'yes';
 %plot_mises = 'yes';
 fact = 9.221e3; % factor for scaled displacements plot
 
