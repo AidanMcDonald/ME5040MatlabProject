@@ -1,17 +1,10 @@
-% Input Data for Example Problem 8.1 (16 element mesh)
-%{
-4--------df=20-----------3
-|                        | q=0
-u=0                      2                              
-|        
-1  
-%}
+% Input Data for 1 element mesh
 
 global ndof nnp nel nen nsd neq ngp nee neq
 global nd e_bc b P D
 global LM ID IEN flags n_bc 
 global x y nbe
-global compute_force plot_mesh plot_temp plot_flux plot_nod
+global compute_force plot_mesh plot_disp plot_disp_contour plot_nod
 
              
 % material properties
@@ -52,6 +45,7 @@ compute_force  = 'yes';
 plot_mesh      = 'yes';
 plot_nod       = 'yes';
 plot_disp      = 'yes';
+plot_disp_contour = 'yes';
 plot_force     = 'yes';
 
 

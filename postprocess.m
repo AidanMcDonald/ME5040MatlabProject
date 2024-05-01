@@ -2,26 +2,66 @@
 function postprocess(d)
 include_flags
 
-% plot the temperature field
-if strcmpi(plot_disp,'yes')==1 
-   d1 = d(ID);
-   figure(2); 
+% Plot deformed mesh
+if strcmpi(plot_disp,'yes')
+    scaleFactor = 1e4;
+    d1 = d(ID);
+    j = 1;
+    for i = 1:ndof:nnp*ndof
+        deformedx(j) = x(j) + d1(i)*scaleFactor;
+        deformedy(j) = y(j) + d1(i+1)*scaleFactor;
+        j = j + 1;
+    end
+   
+   figure(); 
    for e=1:nel
        XX = [x(IEN(1,e))  x(IEN(2,e))  x(IEN(3,e))  x(IEN(4,e))  x(IEN(1,e))];
        YY = [y(IEN(1,e))  y(IEN(2,e))  y(IEN(3,e))  y(IEN(4,e))  y(IEN(1,e))];
-       dd = [d1(IEN(1,e)) d1(IEN(2,e)) d1(IEN(3,e)) d1(IEN(4,e)) d1(IEN(1,e))];
-       patch(XX,YY,dd);hold on;  
+       plot(XX,YY,'g');
+       hold on;
+       XX = [deformedx(IEN(1,e))  deformedx(IEN(2,e))  deformedx(IEN(3,e))  deformedx(IEN(4,e))  deformedx(IEN(1,e))];
+       YY = [deformedy(IEN(1,e))  deformedy(IEN(2,e))  deformedy(IEN(3,e))  deformedy(IEN(4,e))  deformedy(IEN(1,e))];
+       plot(XX,YY,'r');  
    end
-title('Temperature distribution'); xlabel('X'); ylabel('Y'); colorbar;
+title('Deformed shape'); xlabel('X'); ylabel('Y');
+legend('Undeformed shape', 'Deformed shape', 'Location','southeast')
 end
 
-%Compute flux at gauss points
-if strcmpi(compute_load,'yes')==1  
-    fprintf(1,'\n                     Heat Flux at Gauss Points \n')
-    fprintf(1,'----------------------------------------------------------------------------- \n')
+% Displacement contour plots
+if strcmpi(plot_disp_contour,'yes')
+    figure();
     for e=1:nel
-    fprintf(1,'Element  %d \n',e)
-    fprintf(1,'-------------\n')       
-        get_flux(d,e);
+        XX = [x(IEN(1,e)) x(IEN(2,e)) x(IEN(3,e)) x(IEN(4,e)) x(IEN(1,e))];
+        YY = [y(IEN(1,e)) y(IEN(2,e)) y(IEN(3,e)) y(IEN(4,e)) y(IEN(1,e))];
+        d1 = d(ID);
+        j = 1;
+        for i = 1:ndof:nnp*ndof
+            d2(j) = d1(i);
+            j = j + 1;
+        end
+        dd = d2(IEN(:,e));
+        dd(end+1)=dd(1);
+        patch(XX,YY,dd);hold on;
+
     end
+    title('U_x contours'); xlabel('X'); ylabel('Y'); colorbar
+
+
+    figure();
+    for e=1:nel
+        XX = [x(IEN(1,e)) x(IEN(2,e)) x(IEN(3,e)) x(IEN(4,e)) x(IEN(1,e))];
+        YY = [y(IEN(1,e)) y(IEN(2,e)) y(IEN(3,e)) y(IEN(4,e)) y(IEN(1,e))];
+        
+        d1 = d(ID);
+        j = 1;
+        for i = 1:ndof:nnp*ndof
+            d2(j) = d1(i+1);
+            j = j + 1;
+        end
+        dd = d2(IEN(:,e));
+        dd(end+1)=dd(1);
+        patch(XX,YY,dd);hold on;
+
+    end
+    title('U_y contours'); xlabel('X'); ylabel('Y'); colorbar
 end
