@@ -4,13 +4,13 @@ global ndof nnp nel nen nsd neq ngp nee neq
 global nd e_bc b P D
 global LM ID IEN flags n_bc 
 global x y nbe
-global compute_force plot_mesh plot_disp plot_disp_contour plot_nod
+global compute_force plot_mesh plot_disp plot_disp_contour plot_nod print_stressStrain
 
              
 % material properties
 E  = 3e7;        % Young's modulus
-nu = .3;       % Poisson's ratio
-D  = E/(1-nu^2)*[1 nu 0;nu 1 0;0 0 (1-nu)/2]; % conduction matrix
+nu = .3;         % Poisson's ratio
+D  = E/(1-nu^2)*[1 nu 0;nu 1 0;0 0 (1-nu)/2];
 
 % mesh specifications
 nsd  = 2;         % number of space dimensions
@@ -46,7 +46,8 @@ plot_mesh      = 'yes';
 plot_nod       = 'yes';
 plot_disp      = 'yes';
 plot_disp_contour = 'yes';
-print_stressStrain= 'yes';
+print_stressStrain = 'yes';
+plot_vonMises = 'no';
 
 
 % natural BC - defined on edges positioned on natural boundary

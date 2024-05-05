@@ -51,7 +51,6 @@ if strcmpi(plot_disp_contour,'yes')
     for e=1:nel
         XX = [x(IEN(1,e)) x(IEN(2,e)) x(IEN(3,e)) x(IEN(4,e)) x(IEN(1,e))];
         YY = [y(IEN(1,e)) y(IEN(2,e)) y(IEN(3,e)) y(IEN(4,e)) y(IEN(1,e))];
-        
         d1 = d(ID);
         j = 1;
         for i = 1:ndof:nnp*ndof
@@ -61,7 +60,6 @@ if strcmpi(plot_disp_contour,'yes')
         dd = d2(IEN(:,e));
         dd(end+1)=dd(1);
         patch(XX,YY,dd);hold on;
-
     end
     title('U_y contours'); xlabel('X'); ylabel('Y'); colorbar
 end
@@ -69,9 +67,17 @@ end
 if strcmpi(print_stressStrain,'yes')
     fprintf(1,'\n                     Stress and Strain at Gauss Points \n')
     fprintf(1,'----------------------------------------------------------------------------- \n')
+    
     for e=1:nel
-    fprintf(1,'Element  %d \n',e)
-    fprintf(1,'-------------\n')
-    stressAndStrainAtIntPoints(d,e)
+        fprintf(1,'Element  %d \n',e)
+        fprintf(1,'-------------\n')
+        stressAndStrainAtIntPoints(d,e);
     end
+    
 end
+
+if strcmpi(plot_vonMises,'yes')
+    plotVonMises(d);
+end
+
+
